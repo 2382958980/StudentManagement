@@ -71,6 +71,7 @@ public class mainWindow extends JFrame
             inputP.setVisible(false);
             editP.setVisible(true);
             int count=1;
+            int count2=1;
             editP.tab1.removeAll();
             editP.tab2.removeAll();
 
@@ -84,7 +85,20 @@ public class mainWindow extends JFrame
         cont.setPreferredSize(new Dimension(1000,25));
         cont.setBackground(new Color(200,221,242));
         editP.tab1.add(cont);
-        editP.tab1.setPreferredSize(new Dimension(800,200+mainWindow.gradeArray.size()*50));
+
+        JPanel cont2=new JPanel();
+        JLabel amns2=new JLabel("   姓名                     学号                    性别                            籍贯                                          出生日期                   所在班级");
+        amns2.setBounds(40,0,1000,20);
+        amns2.setForeground(new Color(57,96,213));
+        amns2.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        cont2.add(amns2);
+        cont2.setLayout(null);
+        cont2.setPreferredSize(new Dimension(1000,25));
+        cont2.setBackground(new Color(200,221,242));
+        editP.tab2.add(cont2);
+
+        editP.tab1.setPreferredSize(new Dimension(800,50+mainWindow.gradeArray.size()*50));
+        editP.tab2.setPreferredSize(new Dimension(800,50+mainWindow.studentArray.size()*50));
         
         for(Grade g : mainWindow.gradeArray)
         {
@@ -185,7 +199,6 @@ public class mainWindow extends JFrame
                 editP.tab1.repaint();
                 mainWindow.gradeArray.remove(g);
                 Sheet sbjavaSheet=gradeWorkbook.getSheetAt(0);
-                //Row sbjavaRow=sbjavaSheet.getRow(d2.index);
                 sbjavaSheet.shiftRows(d2.index + 1, sbjavaSheet.getLastRowNum(), -1, true, false);
             });
             GradeInfo.add(d2);
@@ -193,14 +206,117 @@ public class mainWindow extends JFrame
         }
         for(Student s : mainWindow.studentArray)
         {
+            System.out.println(1);
+            JPanel StudentInfo=new JPanel();
+            StudentInfo.setLayout(null);
+            StudentInfo.setPreferredSize(new Dimension(1000,50));
+            StudentInfo.setBackground(count2 % 2 == 0 ? new Color(130, 161, 255) : Color.white);
             JTextField[] st=new JTextField[6];
-            st[0].setText(s.name);
-            st[1].setText(s.account);
-            st[2].setText(s.gender);
-            st[3].setText(s.location);
-            st[4].setText(sdf.format(s.birthDate));
-            st[5].setText(s.belongs);
-            //for(JTextField j : )
+            st[0]=new JTextField(s.name);
+            st[1]=new JTextField(s.account);
+            st[2]=new JTextField(s.gender);
+            st[3]=new JTextField(s.location);
+            st[4]=new JTextField(sdf.format(s.birthDate));
+            st[5]=new JTextField(s.belongs);
+            int ind=0;
+            editbutton d=new editbutton("修改",count-1);
+            d.setFont(new Font("微软雅黑", Font.BOLD, 18));
+            d.setForeground(new Color(57,96,213));
+            d.setBounds(820,5,70,40);
+            d.addActionListener((ActionEvent am) ->
+            {
+                if(d.getText().equals("修改"))
+                {
+                    d.setText("确认");
+                    for(int i=0;i<6;i++)
+                    {
+                        st[i].setEditable(true);
+                        st[i].setBorder(new LineBorder(d.index % 2 == 0 ? new Color(130, 161, 255) : Color.white));
+                        st[i].setForeground(new Color(80,80,80));
+                    }
+                }
+                else
+                {
+                    if(isValidFormat("yyyy年MM月dd日", st[4].getText()))
+                    {
+                        d.setText("修改");
+                        for(int i=0;i<6;i++)
+                        {
+                            st[i].setBorder(new EmptyBorder(0, 0, 0, 0));
+                            st[i].setEditable(false);
+                            st[i].setForeground(new Color(57,96,213));
+                        }
+                        try
+                        {
+                            Student s1=new Student(st[0].getText(), st[1].getText(), st[2].getText(), st[3].getText(), sdf.parse(st[4].getText()), st[5].getText());
+                            mainWindow.studentArray.set(d.index,s1);
+                        }
+                        catch(Exception abc)
+                        {
+                            System.out.println("It can't be wrong");
+                        }
+
+                        Sheet sbjavaSheet=studentWorkbook.getSheetAt(0);
+                        Row sbjavaRow=sbjavaSheet.getRow(d.index);
+                        
+                        for(int i=0;i<6;i++)
+                        {
+                            Cell sbjavaCell=sbjavaRow.getCell(i);
+                            sbjavaCell.setCellValue(st[i].getText());
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(d, "日期不合法！", "警告",JOptionPane.WARNING_MESSAGE);  
+                    }
+                }
+            });
+            editbutton d2=new editbutton("删除",count-1);
+            d2.setFont(new Font("微软雅黑", Font.BOLD, 18));
+            d2.setForeground(new Color(57,96,213));
+            d2.setBounds(900,5,70,40);
+            d2.addActionListener((ActionEvent sbjava) ->{
+                editP.tab2.remove(StudentInfo);
+                editP.tab2.revalidate();
+                editP.tab2.repaint();
+                mainWindow.studentArray.remove(s);
+                Sheet sbjavaSheet=studentWorkbook.getSheetAt(0);
+                sbjavaSheet.shiftRows(d2.index + 1, sbjavaSheet.getLastRowNum(), -1, true, false);
+            });
+            StudentInfo.add(d);
+            StudentInfo.add(d2);
+            for(JTextField j : st)
+            {
+                j.setEditable(false);
+                j.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+                j.setBorder(new EmptyBorder(0,0,0,0));
+                j.setForeground(new Color(57,96,213));
+                j.setBackground(count2 % 2 == 0 ? new Color(130, 161, 255) : Color.white);
+                if(ind==0)
+                {
+                    j.setBounds(50,0,75,50);
+                }
+                else if(ind<=1&&ind>0)
+                {
+                    j.setBounds(ind*140,0,140,50);
+                }
+                else if(ind==2)
+                {
+                    j.setBounds(ind*140,0,50,50);
+                }
+                else if(ind>2&&ind<4)
+                {
+                    j.setBounds(ind*100+100,0,100,50);
+                }
+                else
+                {
+                    j.setBounds(ind*170-100,0,170,50);
+                }
+                StudentInfo.add(j);
+                ind++;
+            }
+            count2++;
+            editP.tab2.add(StudentInfo);
         }
         });
         menu1.b3.addActionListener((ActionEvent e) ->{
@@ -293,7 +409,6 @@ public class mainWindow extends JFrame
     public static void main(String[] args) {
         WorkbookReading();
         mainWindow window = new mainWindow();
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

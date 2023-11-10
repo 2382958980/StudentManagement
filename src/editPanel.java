@@ -31,7 +31,7 @@ public class editPanel extends JPanel {
         JScrollPane scrollPane2 = new JScrollPane(tab2);
         tabbedPane.addTab("编辑班级", scrollPane1);
         tabbedPane.addTab("编辑学生", scrollPane2);
-        tabbedPane.setBounds(0, 102, 1000, 600);
+        tabbedPane.setBounds(0, 102, 1000, 650);
         tabbedPane.setForegroundAt(0, new Color(57, 96, 213));
         tabbedPane.setForegroundAt(1, new Color(57, 96, 213));
         tabbedPane.setFont(new Font("微软雅黑", Font.PLAIN, 20));
