@@ -13,6 +13,11 @@ public class inputPanel extends JPanel
     public inputGrade inputg=new inputGrade();
     public inputPanel()
     {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("this look and feel doesn't work? how can it be?");
+        }
         setLayout(new BorderLayout());
         inputg.jb2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) 

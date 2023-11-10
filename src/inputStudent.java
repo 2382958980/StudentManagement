@@ -17,6 +17,11 @@ class inputStudent extends JPanel {
     public JComboBox<String> classComboBox = new JComboBox<>();
     public DefaultComboBoxModel<String> classComboBoxModel = (DefaultComboBoxModel<String>) classComboBox.getModel();
     public inputStudent() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("this look and feel doesn't work? how can it be?");
+        }
         setLayout(null);
         setPreferredSize(new Dimension(890, 1080));
 

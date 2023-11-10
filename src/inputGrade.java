@@ -30,6 +30,11 @@ public class inputGrade extends JPanel {
     public JComboBox<String> professionComboBox = new JComboBox<>(professions);
     public JDateChooser dateChooser = new JDateChooser();
     public inputGrade() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("this look and feel doesn't work? how can it be?");
+        }
         setLayout(null);
         setPreferredSize(new Dimension(890, 1080));
 
@@ -122,8 +127,8 @@ dateTextField.setEditable(false);
                 else
                 {
                     textArea.append("班级“" + a + "”已录入成功\n");
-                    textField.setText("");
-                    professionComboBox.setSelectedItem("交通运输工程");
+                    
+ 
 
                     Sheet s=mainWindow.gradeWorkbook.getSheetAt(0);
                     int lastRowNum = s.getLastRowNum();
@@ -138,6 +143,8 @@ dateTextField.setEditable(false);
                     String dateString = sdf2.format(date);
                     cell1.setCellValue(dateString);
                     dateChooser.setDate(null);
+                    professionComboBox.setSelectedItem("交通运输工程");
+                    textField.setText("");
                 } 
             }
         });
