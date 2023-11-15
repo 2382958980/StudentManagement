@@ -51,7 +51,7 @@ class inputStudent extends JPanel {
         String[] array = arr.toArray(new String[0]);
         for(String i : array)
         {
-            System.out.println(i);
+            //System.out.println(i);
             classComboBoxModel.addElement(i);
         }
         //classComboBox = new JComboBox<>(array);

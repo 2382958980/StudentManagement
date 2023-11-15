@@ -64,11 +64,15 @@ public class searchPanel extends JPanel
 
     //table.setPreferredSize(new Dimension(565,400));
     table.setBackground(Color.white);
+    table.setFont(new Font("微软雅黑", Font.PLAIN, 14));
     //table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     TableColumnModel columnModel = table.getColumnModel();
+    columnModel.getColumn(1).setPreferredWidth(150);
+    columnModel.getColumn(2).setPreferredWidth(50);
     columnModel.getColumn(3).setPreferredWidth(200);
     columnModel.getColumn(4).setPreferredWidth(200); // 设置列宽
     columnModel.getColumn(5).setPreferredWidth(150);
+    table.setRowHeight(30);
 
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setPreferredSize(new Dimension(565,260));
@@ -80,9 +84,13 @@ public class searchPanel extends JPanel
     String[] stu={"姓名", "学号", "籍贯", "出生日期", "所在班级", "性别"};
     JComboBox<String> classComboBox = new JComboBox<>(stu);
     classComboBox.setBounds(880,170,100,40);
+    classComboBox.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+    classComboBox.setForeground(new Color(57, 96, 213));
     add(classComboBox);
 
     JButton tj=new JButton("生成统计图");
+    tj.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+    tj.setForeground(new Color(57, 96, 213));
     tj.setBounds(1000,170,200,40);
     tj.addActionListener((ActionEvent efg) ->
     {

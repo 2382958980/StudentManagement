@@ -214,7 +214,7 @@ public class mainWindow extends JFrame
         }
         for(Student s : mainWindow.studentArray)
         {
-            System.out.println(1);
+            //System.out.println(1);
             JPanel StudentInfo=new JPanel();
             StudentInfo.setLayout(null);
             StudentInfo.setPreferredSize(new Dimension(1000,50));
@@ -258,7 +258,7 @@ public class mainWindow extends JFrame
             String[] array = arr.toArray(new String[0]);
             for(String i : array)
             {
-                System.out.println(i);
+                //System.out.println(i);
                 classComboBoxModel.addElement(i);
             }
             classComboBox.setBounds(700,0,80,50);
@@ -447,6 +447,8 @@ public class mainWindow extends JFrame
             });
             JButton se=new JButton("查询");
                 se.setBounds(505,170,100,40);
+                se.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+                se.setForeground(new Color(57, 96, 213));
                 se.addActionListener((ActionEvent ae) ->{
                 searchP.model.setRowCount(0);
                     for(Student s : studentArray)

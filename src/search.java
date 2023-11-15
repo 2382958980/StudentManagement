@@ -19,6 +19,11 @@ public class search extends JPanel
     JButton addButton=new JButton("<html><div style='text-align: center; vertical-align: middle;'>+</div></html>");
     public search(ArrayList<String> a)
     {
+        jb.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        jb.setForeground(new Color(57, 96, 213));
+        jtf.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        jtf.setForeground(new Color(57, 96, 213));
+        addButton.setForeground(new Color(57,96,213));
         setLayout(null);
         setPreferredSize(new Dimension(580,40));
         //setBorder(new LineBorder(Color.blue));

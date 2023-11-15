@@ -34,7 +34,7 @@ public class inputPanel extends JPanel
                 inputs.classComboBoxModel.removeAllElements();
                 for(String i : array)
                 {
-                    System.out.println(i);
+                    //System.out.println(i);
                     inputs.classComboBoxModel.addElement(i);
                 }
                 
